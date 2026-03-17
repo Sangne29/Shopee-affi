@@ -404,8 +404,14 @@ input::placeholder {
     margin-bottom: 24px;
     border: 1px solid var(--border);
     background: var(--bg);
-    height: 145px;
+    height: 105px;
     position: relative;
+}
+
+@media (min-width: 769px) {
+.banner {
+    height: 145px;
+}
 }
 
 .banner img {
