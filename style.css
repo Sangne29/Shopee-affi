@@ -151,7 +151,7 @@ input[type=text],
 input[type=password] {
     width: 100%;
     padding: 10px 13px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Be Vietnam Pro', sans-serif;
     color: var(--text);
     background: var(--bg);
@@ -159,6 +159,7 @@ input[type=password] {
     border-radius: 9px;
     outline: none;
     transition: border-color 0.15s;
+    -webkit-appearance: none;
 }
 
 input:focus {
@@ -395,23 +396,16 @@ input::placeholder {
     border-color: var(--orange);
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 28px 12px 48px;
-    }
-}
-
+/* Banner */
 .banner {
     width: 100%;
-    border-radius: 10px;
+    border-radius: 14px;
     overflow: hidden;
     margin-bottom: 24px;
     border: 1px solid var(--border);
     background: var(--bg);
-    height: 147px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
+    height: 145px;
+    position: relative;
 }
 
 .banner img {
@@ -420,7 +414,9 @@ input::placeholder {
     object-fit: cover;
     object-position: top;
     display: block;
-    border-radius: 14px;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .banner-placeholder {
@@ -429,4 +425,10 @@ input::placeholder {
     text-align: center;
     padding: 20px;
     display: none;
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 28px 12px 48px;
+    }
 }
