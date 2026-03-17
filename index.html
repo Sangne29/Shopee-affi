@@ -2,597 +2,200 @@
 <html lang="vi">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tiếp thị liên kết</title>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <style>
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --orange: #EE4D2D;
-      --orange-dark: #C73D20;
-      --bg: #F7F5F2;
-      --card: #FFFFFF;
-      --text: #1A1A1A;
-      --muted: #888580;
-      --border: #E8E4DF;
-      --success-bg: #EDFAF3;
-      --success: #1A7A4A;
-      --info-bg: #EBF3FF;
-      --info: #1A4F9A;
-      --danger-bg: #FFF0EE;
-      --danger: #C73D20;
-      --mono: 'Courier New', monospace;
-    }
-
-    body {
-      font-family: 'Be Vietnam Pro', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding: 48px 16px 64px;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 520px;
-    }
-
-    .header {
-      margin-bottom: 32px;
-      position: relative;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .logo {
-      width: 42px;
-      height: 42px;
-      background: var(--orange);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      font-weight: 600;
-      color: white;
-      flex-shrink: 0;
-    }
-
-    .brand-text h1 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-      letter-spacing: -0.3px;
-    }
-
-    .brand-text p {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 1px;
-    }
-
-    .tagline {
-      font-size: 13px;
-      color: var(--muted);
-      line-height: 1.65;
-      padding-left: 12px;
-      border-left: 2px solid var(--orange);
-    }
-
-    .login-dot {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      opacity: 0.2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: opacity 0.2s;
-    }
-
-    .login-dot:hover {
-      opacity: 0.5;
-    }
-
-    .login-dot span {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--muted);
-      display: block;
-    }
-
-    .login-box {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 14px;
-      margin-bottom: 14px;
-      display: none;
-    }
-
-    .login-box .row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .login-box input {
-      flex: 1;
-    }
-
-    .login-err {
-      font-size: 12px;
-      color: var(--danger);
-      margin-top: 7px;
-      display: none;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 12px;
-    }
-
-    input[type=text],
-    input[type=password] {
-      width: 100%;
-      padding: 10px 13px;
-      font-size: 14px;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      outline: none;
-      transition: border-color 0.15s;
-    }
-
-    input:focus {
-      border-color: var(--orange);
-      background: white;
-    }
-
-    input::placeholder {
-      color: #BBB5AE;
-    }
-
-    .btn-generate {
-      width: 100%;
-      padding: 13px;
-      font-size: 15px;
-      font-weight: 600;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      color: white;
-      background: var(--orange);
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
-      margin-bottom: 12px;
-      letter-spacing: -0.2px;
-    }
-
-    .btn-generate:hover {
-      background: var(--orange-dark);
-    }
-
-    .btn-generate:active {
-      transform: scale(0.99);
-    }
-
-    .result-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      display: none;
-      margin-bottom: 12px;
-      animation: slideIn 0.2s ease;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .result-header {
-      background: var(--orange);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .result-header .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #9FE1CB;
-    }
-
-    .result-header span {
-      font-size: 13px;
-      color: white;
-      font-weight: 500;
-    }
-
-    .result-body {
-      padding: 16px;
-    }
-
-    .link-display {
-      font-family: var(--mono);
-      font-size: 11.5px;
-      color: var(--text);
-      word-break: break-all;
-      line-height: 1.75;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      padding: 11px 13px;
-    }
-
-    .btn-copy {
-      width: 100%;
-      margin-top: 10px;
-      padding: 11px;
-      font-size: 14px;
-      font-weight: 600;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      color: white;
-      background: var(--orange);
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.15s;
-    }
-
-    .btn-copy:hover {
-      background: var(--orange-dark);
-    }
-
-    .btn-copy.copied {
-      background: var(--success-bg);
-      color: var(--success);
-      border: 1px solid #A8DBBF;
-    }
-
-    .fb-note {
-      margin-top: 10px;
-      background: var(--info-bg);
-      border-radius: 9px;
-      padding: 10px 13px;
-      font-size: 12.5px;
-      color: var(--info);
-      line-height: 1.65;
-    }
-
-    .err-msg {
-      font-size: 13px;
-      color: var(--danger);
-      background: var(--danger-bg);
-      border-radius: 9px;
-      padding: 9px 13px;
-      margin-top: 10px;
-      display: none;
-    }
-
-    .hist-section {
-      display: none;
-      animation: slideIn 0.2s ease;
-    }
-
-    .hist-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
-    .hist-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--muted);
-      letter-spacing: 0.06em;
-    }
-
-    .hist-actions {
-      display: flex;
-      gap: 12px;
-    }
-
-    .txt-btn {
-      font-size: 11px;
-      color: var(--muted);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      padding: 0;
-    }
-
-    .txt-btn:hover {
-      color: var(--text);
-    }
-
-    .hist-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 4px 16px;
-    }
-
-    .hist-empty {
-      font-size: 13px;
-      color: var(--muted);
-      text-align: center;
-      padding: 14px 0;
-    }
-
-    .hist-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .hist-row:last-child {
-      border-bottom: none;
-    }
-
-    .hist-time {
-      font-size: 10px;
-      color: #C0BAB2;
-      min-width: 72px;
-    }
-
-    .hist-lbl {
-      font-size: 12px;
-      color: var(--muted);
-      flex: 1;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .hist-copy-btn {
-      font-size: 11px;
-      padding: 3px 10px;
-      background: none;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: 'Be Vietnam Pro', sans-serif;
-      flex-shrink: 0;
-      transition: color 0.15s;
-    }
-
-    .hist-copy-btn:hover {
-      color: var(--orange);
-      border-color: var(--orange);
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 28px 12px 48px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:image" content="./VoucherBanner.png">
+    <title>Tiếp thị liên kết</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="container">
-
-    <div class="header">
-      <div class="brand">
-        <div class="logo">S</div>
-        <div class="brand-text">
-          <h1>Tiếp thị liên kết</h1>
-          <p>Dán link. Kiếm hoa hồng.</p>
+    <div class="container">
+        <div class="banner" id="banner">
+            <img src="./VoucherBanner.png" alt="Voucher giảm 25% độc quyền Facebook x Shopee"
+                onerror="this.style.display='none';document.getElementById('banner-placeholder').style.display='block'">
         </div>
-      </div>
-      <div class="tagline">Paste link sản phẩm Shopee — Nhận mã giảm giá Facebook x Shopee,<br>
-        sẵn sàng chia sẻ Facebook.
-      </div>
-      <button class="login-dot" id="login-toggle" onclick="toggleLogin()" title="">
-        <span></span>
-      </button>
-    </div>
-
-    <div class="login-box" id="login-box">
-      <div class="row">
-        <input type="text" id="l-user" placeholder="Tên đăng nhập">
-        <input type="password" id="l-pass" placeholder="Mật khẩu" style="flex:0.8;">
-        <button onclick="doLogin()"
-          style="padding:10px 14px;background:var(--orange);color:white;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-family:'Be Vietnam Pro',sans-serif;font-weight:500;white-space:nowrap;">Vào</button>
-      </div>
-      <div class="login-err" id="login-err">Sai tên đăng nhập hoặc mật khẩu.</div>
-    </div>
-
-    <div class="card">
-      <input type="text" id="product-url" placeholder="https://shopee.vn/...  hoặc  https://s.shopee.vn/...">
-      <div class="err-msg" id="err-msg"></div>
-    </div>
-
-    <button class="btn-generate" onclick="generate()">Tạo link affiliate</button>
-
-    <div class="result-card" id="result-card">
-      <div class="result-header">
-        <div class="dot"></div>
-        <span>Link sẵn sàng</span>
-      </div>
-      <div class="result-body">
-        <div class="link-display" id="link-display"></div>
-        <button class="btn-copy" id="btn-copy" onclick="copyLink()">Sao chép link</button>
-        <div class="fb-note">Dán link này lên Facebook — người bấm vào sẽ nhận mã giảm giá <strong>Facebook x
-            Shopee</strong>. Nếu họ mua hàng, bạn nhận hoa hồng.</div>
-      </div>
-    </div>
-
-    <div class="hist-section" id="hist-section">
-      <div class="hist-header">
-        <span class="hist-label">LỊCH SỬ</span>
-        <div class="hist-actions">
-          <button class="txt-btn" onclick="clearHist()">Xóa tất cả</button>
-          <button class="txt-btn" onclick="doLogout()">Đăng xuất</button>
+        <div class="header">
+            <div class="brand">
+                <div class="logo">S</div>
+                <div class="brand-text">
+                    <h1>Tiếp thị liên kết</h1>
+                    <p>Dán link tại đây.</p>
+                </div>
+            </div>
+            <div class="tagline">Paste link sản phẩm Shopee — Nhận mã giảm giá Facebook x Shopee,<br>
+                sẵn sàng chia sẻ Facebook.
+            </div>
+            <button class="login-dot" id="login-toggle" onclick="toggleLogin()" title="">
+                <span></span>
+            </button>
         </div>
-      </div>
-      <div class="hist-card">
-        <div id="hist-list">
-          <div class="hist-empty">Chưa có link nào</div>
+
+        <div class="login-box" id="login-box">
+            <div class="row">
+                <input type="text" id="l-user" placeholder="Tên đăng nhập">
+                <input type="password" id="l-pass" placeholder="Mật khẩu" style="flex:0.8;">
+                <button onclick="doLogin()"
+                    style="padding:10px 14px;background:var(--orange);color:white;border:none;border-radius:9px;cursor:pointer;font-size:13px;font-family:'Be Vietnam Pro',sans-serif;font-weight:500;white-space:nowrap;">Vào</button>
+            </div>
+            <div class="login-err" id="login-err">Sai tên đăng nhập hoặc mật khẩu.</div>
         </div>
-      </div>
+
+        <div class="card">
+            <input type="text" id="product-url" placeholder="https://shopee.vn/...  hoặc  https://s.shopee.vn/...">
+            <div class="err-msg" id="err-msg"></div>
+        </div>
+
+        <button class="btn-generate" onclick="generate()">Tạo link affiliate</button>
+
+        <div class="result-card" id="result-card">
+            <div class="result-header">
+                <div class="dot"></div>
+                <span>Link sẵn sàng</span>
+            </div>
+            <div class="result-body">
+                <div class="link-display" id="link-display"></div>
+                <button class="btn-copy" id="btn-copy" onclick="copyLink()">Sao chép link</button>
+                <div class="fb-note">Dán link này lên bài post bất kì trên Facebook —> người bấm vào sẽ nhận mã giảm giá
+                    <strong>Facebook x
+                        Shopee</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="hist-section" id="hist-section">
+            <div class="hist-header">
+                <span class="hist-label">LỊCH SỬ</span>
+                <div class="hist-actions">
+                    <button class="txt-btn" onclick="clearHist()">Xóa tất cả</button>
+                    <button class="txt-btn" onclick="doLogout()">Đăng xuất</button>
+                </div>
+            </div>
+            <div class="hist-card">
+                <div id="hist-list">
+                    <div class="hist-empty">Chưa có link nào</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
-  </div>
+    <script>
+        const AFFILIATE_ID = '17319670508';
+        const CREDS = { u: 'sang', p: '123' };
+        let currentLink = '';
+        let loggedIn = false;
+        let hist = JSON.parse(localStorage.getItem('saff_hist2') || '[]');
 
-  <script>
-    const AFFILIATE_ID = '17319670508';
-    const CREDS = { u: 'sang', p: '123' };
-    let currentLink = '';
-    let loggedIn = false;
-    let hist = JSON.parse(localStorage.getItem('saff_hist2') || '[]');
+        function toggleLogin() {
+            if (loggedIn) return;
+            const box = document.getElementById('login-box');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+            if (box.style.display === 'block') setTimeout(() => document.getElementById('l-user').focus(), 50);
+        }
 
-    function toggleLogin() {
-      if (loggedIn) return;
-      const box = document.getElementById('login-box');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
-      if (box.style.display === 'block') setTimeout(() => document.getElementById('l-user').focus(), 50);
-    }
+        function doLogin() {
+            const u = document.getElementById('l-user').value.trim();
+            const p = document.getElementById('l-pass').value;
+            const err = document.getElementById('login-err');
+            if (u === CREDS.u && p === CREDS.p) {
+                loggedIn = true;
+                document.getElementById('login-box').style.display = 'none';
+                document.getElementById('login-toggle').style.display = 'none';
+                document.getElementById('hist-section').style.display = 'block';
+                renderHist();
+            } else {
+                err.style.display = 'block';
+                setTimeout(() => err.style.display = 'none', 2500);
+            }
+        }
 
-    function doLogin() {
-      const u = document.getElementById('l-user').value.trim();
-      const p = document.getElementById('l-pass').value;
-      const err = document.getElementById('login-err');
-      if (u === CREDS.u && p === CREDS.p) {
-        loggedIn = true;
-        document.getElementById('login-box').style.display = 'none';
-        document.getElementById('login-toggle').style.display = 'none';
-        document.getElementById('hist-section').style.display = 'block';
-        renderHist();
-      } else {
-        err.style.display = 'block';
-        setTimeout(() => err.style.display = 'none', 2500);
-      }
-    }
+        function doLogout() {
+            loggedIn = false;
+            document.getElementById('hist-section').style.display = 'none';
+            document.getElementById('login-toggle').style.display = 'flex';
+            document.getElementById('l-user').value = '';
+            document.getElementById('l-pass').value = '';
+        }
 
-    function doLogout() {
-      loggedIn = false;
-      document.getElementById('hist-section').style.display = 'none';
-      document.getElementById('login-toggle').style.display = 'flex';
-      document.getElementById('l-user').value = '';
-      document.getElementById('l-pass').value = '';
-    }
+        function showErr(msg) {
+            const el = document.getElementById('err-msg');
+            el.textContent = msg;
+            el.style.display = msg ? 'block' : 'none';
+        }
 
-    function showErr(msg) {
-      const el = document.getElementById('err-msg');
-      el.textContent = msg;
-      el.style.display = msg ? 'block' : 'none';
-    }
+        function isShopeeUrl(url) {
+            try {
+                const h = new URL(url).hostname;
+                return h.includes('shopee.vn') || h.includes('shopee.com');
+            } catch { return false; }
+        }
 
-    function isShopeeUrl(url) {
-      try {
-        const h = new URL(url).hostname;
-        return h.includes('shopee.vn') || h.includes('shopee.com');
-      } catch { return false; }
-    }
+        function generate() {
+            showErr('');
+            const url = document.getElementById('product-url').value.trim();
+            if (!url) { showErr('Vui lòng nhập URL sản phẩm Shopee.'); return; }
+            if (!isShopeeUrl(url)) { showErr('URL không hợp lệ. Phải là link shopee.vn hoặc s.shopee.vn'); return; }
 
-    function generate() {
-      showErr('');
-      const url = document.getElementById('product-url').value.trim();
-      if (!url) { showErr('Vui lòng nhập URL sản phẩm Shopee.'); return; }
-      if (!isShopeeUrl(url)) { showErr('URL không hợp lệ. Phải là link shopee.vn hoặc s.shopee.vn'); return; }
+            currentLink = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=${AFFILIATE_ID}`;
 
-      currentLink = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=${AFFILIATE_ID}`;
+            document.getElementById('link-display').textContent = currentLink;
+            const rc = document.getElementById('result-card');
+            rc.style.display = 'block';
+            const btn = document.getElementById('btn-copy');
+            btn.textContent = 'Sao chép link';
+            btn.className = 'btn-copy';
 
-      document.getElementById('link-display').textContent = currentLink;
-      const rc = document.getElementById('result-card');
-      rc.style.display = 'block';
-      const btn = document.getElementById('btn-copy');
-      btn.textContent = 'Sao chép link';
-      btn.className = 'btn-copy';
+            const entry = {
+                ts: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }),
+                link: currentLink,
+                label: url.replace('https://', '').substring(0, 50)
+            };
+            hist.unshift(entry);
+            if (hist.length > 20) hist = hist.slice(0, 20);
+            localStorage.setItem('saff_hist2', JSON.stringify(hist));
+            if (loggedIn) renderHist();
+            rc.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
 
-      const entry = {
-        ts: new Date().toLocaleString('vi-VN', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' }),
-        link: currentLink,
-        label: url.replace('https://', '').substring(0, 50)
-      };
-      hist.unshift(entry);
-      if (hist.length > 20) hist = hist.slice(0, 20);
-      localStorage.setItem('saff_hist2', JSON.stringify(hist));
-      if (loggedIn) renderHist();
-      rc.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
+        function copyLink() {
+            navigator.clipboard.writeText(currentLink).then(() => {
+                const btn = document.getElementById('btn-copy');
+                btn.textContent = 'Đã sao chép!';
+                btn.className = 'btn-copy copied';
+                setTimeout(() => { btn.textContent = 'Sao chép link'; btn.className = 'btn-copy'; }, 2500);
+            });
+        }
 
-    function copyLink() {
-      navigator.clipboard.writeText(currentLink).then(() => {
-        const btn = document.getElementById('btn-copy');
-        btn.textContent = 'Đã sao chép!';
-        btn.className = 'btn-copy copied';
-        setTimeout(() => { btn.textContent = 'Sao chép link'; btn.className = 'btn-copy'; }, 2500);
-      });
-    }
+        function copyHistLink(i) {
+            navigator.clipboard.writeText(hist[i].link);
+            const btns = document.querySelectorAll('.hist-copy-btn');
+            if (btns[i]) { btns[i].textContent = 'Copied!'; setTimeout(() => btns[i].textContent = 'Copy', 1500); }
+        }
 
-    function copyHistLink(i) {
-      navigator.clipboard.writeText(hist[i].link);
-      const btns = document.querySelectorAll('.hist-copy-btn');
-      if (btns[i]) { btns[i].textContent = 'Copied!'; setTimeout(() => btns[i].textContent = 'Copy', 1500); }
-    }
+        function clearHist() {
+            hist = [];
+            localStorage.setItem('saff_hist2', '[]');
+            renderHist();
+        }
 
-    function clearHist() {
-      hist = [];
-      localStorage.setItem('saff_hist2', '[]');
-      renderHist();
-    }
-
-    function renderHist() {
-      const el = document.getElementById('hist-list');
-      if (!hist.length) { el.innerHTML = '<div class="hist-empty">Chưa có link nào</div>'; return; }
-      el.innerHTML = hist.map((h, i) => `
+        function renderHist() {
+            const el = document.getElementById('hist-list');
+            if (!hist.length) { el.innerHTML = '<div class="hist-empty">Chưa có link nào</div>'; return; }
+            el.innerHTML = hist.map((h, i) => `
       <div class="hist-row">
         <span class="hist-time">${h.ts}</span>
         <span class="hist-lbl">${h.label}</span>
         <button class="hist-copy-btn" onclick="copyHistLink(${i})">Copy</button>
       </div>
     `).join('');
-    }
+        }
 
-    document.getElementById('product-url').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
-    document.getElementById('l-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
-  </script>
+        document.getElementById('product-url').addEventListener('keydown', e => { if (e.key === 'Enter') generate(); });
+        document.getElementById('l-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+    </script>
 </body>
 
 </html>
