@@ -404,7 +404,7 @@ input::placeholder {
     margin-bottom: 24px;
     border: 1px solid var(--border);
     background: var(--bg);
-    height: 105px;
+    height: 130px;
     position: relative;
 }
 
