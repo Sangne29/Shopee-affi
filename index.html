@@ -146,7 +146,11 @@
             if (!url) { showErr('Vui lòng nhập URL sản phẩm Shopee.'); return; }
             if (!isShopeeUrl(url)) { showErr('URL không hợp lệ. Phải là link shopee.vn hoặc s.shopee.vn'); return; }
 
-            currentLink = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=${AFFILIATE_ID}`;
+            //currentLink = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(url)}&affiliate_id=${AFFILIATE_ID}`;
+
+            const originWithUtm = `${url}${url.includes('?') ? '&' : '?'}utm_source=facebook`;
+
+            currentLink = `https://s.shopee.vn/an_redir?origin_link=${encodeURIComponent(originWithUtm)}&affiliate_id=${AFFILIATE_ID}`;
 
             document.getElementById('link-display').textContent = currentLink;
             const rc = document.getElementById('result-card');
