@@ -136,7 +136,7 @@
         function isShopeeUrl(url) {
             try {
                 const h = new URL(url).hostname;
-                return h.includes('shopee.vn') || h.includes('shopee.com') || || h.includes('shp.ee');
+                return h.includes('shopee.vn') || h.includes('shopee.com') || h.includes('shp.ee');
             } catch { return false; }
         }
 
